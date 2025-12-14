@@ -42,6 +42,7 @@ services:
       - gateway
       - appwrite
       - runtimes
+      - dokploy-network
 
   appwrite:
     container_name: appwrite
@@ -57,6 +58,7 @@ services:
       - 9501:80
     networks:
       - appwrite
+      - dokploy-network
     labels:
       - "traefik.enable=true"
       - "traefik.constraint-label-stack=appwrite"
@@ -224,6 +226,7 @@ services:
     restart: unless-stopped
     networks:
       - appwrite
+      - dokploy-network
     labels:
       - "traefik.enable=true"
       - "traefik.constraint-label-stack=appwrite"
@@ -263,6 +266,7 @@ services:
       - traefik.http.routers.appwrite_realtime_wss.tls=true
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -295,6 +299,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -324,6 +329,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -357,6 +363,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     depends_on:
       - redis
       - mariadb
@@ -420,6 +427,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -451,6 +459,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - appwrite-functions:/storage/functions:rw
       - appwrite-sites:/storage/sites:rw
@@ -525,6 +534,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     depends_on:
       - redis
       - mariadb
@@ -564,6 +574,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -607,6 +618,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -642,6 +654,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - appwrite-uploads:/storage/uploads:rw
       - ./app:/usr/src/code/app
@@ -697,6 +710,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - appwrite-imports:/storage/imports:rw
       - ./app:/usr/src/code/app
@@ -736,6 +750,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -779,6 +794,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -810,6 +826,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -841,6 +858,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -872,6 +890,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -900,6 +919,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -927,6 +947,7 @@ services:
     image: appwrite-dev
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - ./app:/usr/src/code/app
       - ./src:/usr/src/code/src
@@ -953,6 +974,7 @@ services:
     image: appwrite/assistant:0.8.3
     networks:
       - appwrite
+      - dokploy-network
     environment:
       - _APP_ASSISTANT_OPENAI_API_KEY
 
@@ -961,6 +983,7 @@ services:
     image: appwrite/browser:0.2.4
     networks:
       - appwrite
+      - dokploy-network
 
   openruntimes-executor:
     container_name: openruntimes-executor
@@ -972,6 +995,7 @@ services:
     networks:
       - appwrite
       - runtimes
+      - dokploy-network
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - appwrite-builds:/storage/builds:rw
@@ -1024,6 +1048,7 @@ services:
     networks:
       - appwrite
       - runtimes
+      - dokploy-network
     environment:
       - OPR_PROXY_WORKER_PER_CORE=$_APP_WORKER_PER_CORE
       - OPR_PROXY_ENV=$_APP_ENV
@@ -1042,6 +1067,7 @@ services:
     <<: *x-logging
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - appwrite-mariadb:/var/lib/mysql:rw
     ports:
@@ -1067,6 +1093,7 @@ services:
       - "6379:6379"
     networks:
       - appwrite
+      - dokploy-network
     volumes:
       - appwrite-redis:/data:rw
 
@@ -1091,6 +1118,7 @@ services:
     networks:
       - appwrite
       - gateway
+      - dokploy-network
     labels:
       - "traefik.enable=true"
       - "traefik.constraint-label-stack=appwrite"
@@ -1112,6 +1140,7 @@ services:
       - "9504:5000"
     networks:
       - appwrite
+      - dokploy-network
 
   request-catcher-sms: # used mainly for dev tests (mock SMS auth secret)
     image: appwrite/requestcatcher:1.0.0
@@ -1121,6 +1150,7 @@ services:
       - "9507:5000"
     networks:
       - appwrite
+      - dokploy-network
 
   adminer:
     image: adminer
@@ -1132,6 +1162,7 @@ services:
     networks:
       - appwrite
       - gateway
+      - dokploy-network
     environment:
       - ADMINER_DESIGN=pepa-linha
       - ADMINER_DEFAULT_SERVER=mariadb
@@ -1161,6 +1192,7 @@ services:
     networks:
       - appwrite
       - gateway
+      - dokploy-network
     environment:
       - RI_PRE_SETUP_DATABASES_PATH=/mnt/connections.json
     configs:
@@ -1188,6 +1220,7 @@ services:
     restart: unless-stopped
     networks:
       - appwrite
+      - dokploy-network
     ports:
       - "9509:3000"
     environment:
@@ -1202,6 +1235,8 @@ networks:
     name: appwrite
   runtimes:
     name: runtimes
+  dokploy-network:
+    external: true
 
 configs:
   redisinsight-connections.json:
