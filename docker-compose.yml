@@ -1269,7 +1269,3 @@ volumes:
   appwrite-sites:
   appwrite-builds:
   appwrite-config:
-
-networks:
-  dokploy-network:
-    external: true
